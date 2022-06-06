@@ -8,8 +8,20 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-
   List<Widget> scoreKeeper = [];
+  List<String> questions = [
+    'You can lead a cow down stairs but not up stairs.',
+    'Approximately one quarter of human bones are in the feet.',
+    'A slug\'s blood is green.'
+  ];
+
+  List<bool> answers = [
+    false,
+    true,
+    true
+  ];
+
+  int questionTracker = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -20,29 +32,55 @@ class _QuizScreenState extends State<QuizScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            questionTile(question: "This is where the question text will go."),
-            buttonWidget(buttonColor: Colors.green, buttonText: "True", callback: (){
-              setState(() {
-                scoreKeeper.add(const Icon(Icons.check, color: Colors.green,));
-              });
-            }),
-            buttonWidget(buttonColor: Colors.red, buttonText: "False", callback: (){
-              setState(() {
-                scoreKeeper.add(const Icon(Icons.close, color: Colors.red,));
-              });
-            }),
-
+            questionTile(
+              question: questions[questionTracker],
+            ),
+            buttonWidget(
+                buttonColor: Colors.green,
+                buttonText: "True",
+                callback: () {
+                  bool correctAnswer = answers[questionTracker];
+                  if(correctAnswer == true){
+                    print("User got it right");
+                  }else{
+                    print("User got it wrong");
+                  }
+                  setState(() {
+                    questionTracker++;
+                    scoreKeeper.add(const Icon(
+                      Icons.check,
+                      color: Colors.green,
+                    ));
+                  });
+                }),
+            buttonWidget(
+                buttonColor: Colors.red,
+                buttonText: "False",
+                callback: () {
+                  bool correctAnswer = answers[questionTracker];
+                  if(correctAnswer == false){
+                    print("User got it right");
+                  }else{
+                    print("User got it wrong");
+                  }
+                  setState(() {
+                    questionTracker++;
+                    scoreKeeper.add(const Icon(
+                      Icons.close,
+                      color: Colors.red,
+                    ));
+                  });
+                }),
             Row(
               children: scoreKeeper,
             ),
-
           ],
         ),
       ),
     );
   }
 
-  Widget questionTile({required String question}){
+  Widget questionTile({required String question}) {
     return Expanded(
       flex: 5,
       child: Padding(
@@ -61,7 +99,10 @@ class _QuizScreenState extends State<QuizScreen> {
     );
   }
 
-  Widget buttonWidget({required Color buttonColor, required String buttonText, required VoidCallback callback}){
+  Widget buttonWidget(
+      {required Color buttonColor,
+      required String buttonText,
+      required VoidCallback callback}) {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(15.0),
@@ -69,8 +110,9 @@ class _QuizScreenState extends State<QuizScreen> {
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(
               buttonColor,
-            ),),
-          child:  Text(
+            ),
+          ),
+          child: Text(
             buttonText,
             style: const TextStyle(
               color: Colors.white,
