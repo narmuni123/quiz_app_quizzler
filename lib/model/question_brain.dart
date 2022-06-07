@@ -1,6 +1,9 @@
 import 'package:quiz_app_quizzler/model/question_model.dart';
 
 class QuestionBrain{
+
+  int _questionTracker = 0;
+
   final List<Question> _questionBank = [
     Question(q: 'Some cats are actually allergic to humans', a: true),
     Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
@@ -31,11 +34,17 @@ class QuestionBrain{
         a: true),
   ];
 
-  String? getQuestionText(int questionNumber){
-    return _questionBank[questionNumber].questionText;
+  void nextQuestion(){
+    if(_questionTracker < _questionBank.length - 1){
+      _questionTracker++;
+    }
   }
 
-  bool? getAnswer(int answerNumber){
-    return _questionBank[answerNumber].questionAnswer;
+  String? getQuestionText(){
+    return _questionBank[_questionTracker].questionText;
+  }
+
+  bool? getAnswer(){
+    return _questionBank[_questionTracker].questionAnswer;
   }
 }

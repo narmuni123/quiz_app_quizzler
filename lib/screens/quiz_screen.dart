@@ -13,7 +13,6 @@ class _QuizScreenState extends State<QuizScreen> {
 
   QuestionBrain questionBrain = QuestionBrain();
 
-  int questionTracker = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +24,19 @@ class _QuizScreenState extends State<QuizScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             questionTile(
-              question: questionBrain.getQuestionText(questionTracker)!,
+              question: questionBrain.getQuestionText()!,
             ),
             buttonWidget(
                 buttonColor: Colors.green,
                 buttonText: "True",
                 callback: () {
                   bool correctAnswer =
-                  questionBrain.getAnswer(questionTracker)!;
+                  questionBrain.getAnswer()!;
                   if (correctAnswer == true) {
                   } else {
                   }
                   setState(() {
-                    questionTracker++;
+                    questionBrain.nextQuestion();
                     scoreKeeper.add(const Icon(
                       Icons.check,
                       color: Colors.green,
@@ -49,12 +48,12 @@ class _QuizScreenState extends State<QuizScreen> {
                 buttonText: "False",
                 callback: () {
                   bool correctAnswer =
-                  questionBrain.getAnswer(questionTracker)!;
+                  questionBrain.getAnswer()!;
                   if (correctAnswer == false) {
                   } else {
                   }
                   setState(() {
-                    questionTracker++;
+                    questionBrain.nextQuestion();
                     scoreKeeper.add(const Icon(
                       Icons.close,
                       color: Colors.red,
