@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 class DialogDisplay{
 
   static showErrorDialog(BuildContext context, String errorMessage) {
-
     // set up the button
     Widget okButton =  Padding(
       padding: const EdgeInsets.only(left: 70, right: 70,),
@@ -37,8 +36,7 @@ class DialogDisplay{
           fontWeight: FontWeight.w700,
         ),
       ),
-
-      content: Text(errorMessage, textAlign: TextAlign.center, style:  const TextStyle(fontSize: 22, fontWeight: FontWeight.w400, color: Colors.white),),
+      content: Text(errorMessage, textAlign: TextAlign.center, style:  const TextStyle(fontSize: 22, fontWeight: FontWeight.w400, color: Colors.black),),
       actions: [
         okButton,
       ],

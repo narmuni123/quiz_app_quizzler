@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app_quizzler/model/question_brain.dart';
+import 'package:quiz_app_quizzler/reusables/dialog_diaplay.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({Key? key}) : super(key: key);
@@ -16,18 +17,24 @@ class _QuizScreenState extends State<QuizScreen> {
   void checkAnswer(bool userPickedAnswer){
     bool correctAnswer = questionBrain.getAnswer()!;
     setState(() {
-    if (userPickedAnswer == correctAnswer) {
-      scoreKeeper.add(const Icon(
-        Icons.check,
-        color: Colors.green,
-      ));
-    } else {
-      scoreKeeper.add(const Icon(
-        Icons.close,
-        color: Colors.red,
-      ));
-    }
-      questionBrain.nextQuestion();
+      if(questionBrain.isFinished() == true){
+        DialogDisplay.showErrorDialog(context, "Quiz Finished, press ok to restart!");
+        questionBrain.reset();
+        scoreKeeper.clear();
+      }else{
+        if (userPickedAnswer == correctAnswer) {
+          scoreKeeper.add(const Icon(
+            Icons.check,
+            color: Colors.green,
+          ));
+        } else {
+          scoreKeeper.add(const Icon(
+            Icons.close,
+            color: Colors.red,
+          ));
+        }
+        questionBrain.nextQuestion();
+      }
     });
   }
 

@@ -47,4 +47,16 @@ class QuestionBrain{
   bool? getAnswer(){
     return _questionBank[_questionTracker].questionAnswer;
   }
+
+  bool isFinished() {
+    if (_questionTracker >= _questionBank.length - 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void reset() {
+    _questionTracker = 0;
+  }
 }
