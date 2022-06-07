@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app_quizzler/model/question_brain.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({Key? key}) : super(key: key);
@@ -9,17 +10,8 @@ class QuizScreen extends StatefulWidget {
 
 class _QuizScreenState extends State<QuizScreen> {
   List<Widget> scoreKeeper = [];
-  List<String> questions = [
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.'
-  ];
 
-  List<bool> answers = [
-    false,
-    true,
-    true
-  ];
+  QuestionBrain questionBrain = QuestionBrain();
 
   int questionTracker = 0;
 
@@ -33,17 +25,16 @@ class _QuizScreenState extends State<QuizScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             questionTile(
-              question: questions[questionTracker],
+              question: questionBrain.questionBank[questionTracker].questionText!,
             ),
             buttonWidget(
                 buttonColor: Colors.green,
                 buttonText: "True",
                 callback: () {
-                  bool correctAnswer = answers[questionTracker];
-                  if(correctAnswer == true){
-                    print("User got it right");
-                  }else{
-                    print("User got it wrong");
+                  bool correctAnswer =
+                  questionBrain.questionBank[questionTracker].questionAnswer!;
+                  if (correctAnswer == true) {
+                  } else {
                   }
                   setState(() {
                     questionTracker++;
@@ -57,11 +48,10 @@ class _QuizScreenState extends State<QuizScreen> {
                 buttonColor: Colors.red,
                 buttonText: "False",
                 callback: () {
-                  bool correctAnswer = answers[questionTracker];
-                  if(correctAnswer == false){
-                    print("User got it right");
-                  }else{
-                    print("User got it wrong");
+                  bool correctAnswer =
+                  questionBrain.questionBank[questionTracker].questionAnswer!;
+                  if (correctAnswer == false) {
+                  } else {
                   }
                   setState(() {
                     questionTracker++;
