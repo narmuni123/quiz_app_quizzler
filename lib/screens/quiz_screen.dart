@@ -13,6 +13,24 @@ class _QuizScreenState extends State<QuizScreen> {
 
   QuestionBrain questionBrain = QuestionBrain();
 
+  void checkAnswer(bool userPickedAnswer){
+    bool correctAnswer = questionBrain.getAnswer()!;
+    setState(() {
+    if (userPickedAnswer == correctAnswer) {
+      scoreKeeper.add(const Icon(
+        Icons.check,
+        color: Colors.green,
+      ));
+    } else {
+      scoreKeeper.add(const Icon(
+        Icons.close,
+        color: Colors.red,
+      ));
+    }
+      questionBrain.nextQuestion();
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,35 +48,13 @@ class _QuizScreenState extends State<QuizScreen> {
                 buttonColor: Colors.green,
                 buttonText: "True",
                 callback: () {
-                  bool correctAnswer =
-                  questionBrain.getAnswer()!;
-                  if (correctAnswer == true) {
-                  } else {
-                  }
-                  setState(() {
-                    questionBrain.nextQuestion();
-                    scoreKeeper.add(const Icon(
-                      Icons.check,
-                      color: Colors.green,
-                    ));
-                  });
+                  checkAnswer(true);
                 }),
             buttonWidget(
                 buttonColor: Colors.red,
                 buttonText: "False",
                 callback: () {
-                  bool correctAnswer =
-                  questionBrain.getAnswer()!;
-                  if (correctAnswer == false) {
-                  } else {
-                  }
-                  setState(() {
-                    questionBrain.nextQuestion();
-                    scoreKeeper.add(const Icon(
-                      Icons.close,
-                      color: Colors.red,
-                    ));
-                  });
+                  checkAnswer(false);
                 }),
             Row(
               children: scoreKeeper,
