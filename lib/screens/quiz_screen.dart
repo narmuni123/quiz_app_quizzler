@@ -25,14 +25,14 @@ class _QuizScreenState extends State<QuizScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             questionTile(
-              question: questionBrain.questionBank[questionTracker].questionText!,
+              question: questionBrain.getQuestionText(questionTracker)!,
             ),
             buttonWidget(
                 buttonColor: Colors.green,
                 buttonText: "True",
                 callback: () {
                   bool correctAnswer =
-                  questionBrain.questionBank[questionTracker].questionAnswer!;
+                  questionBrain.getAnswer(questionTracker)!;
                   if (correctAnswer == true) {
                   } else {
                   }
@@ -49,7 +49,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 buttonText: "False",
                 callback: () {
                   bool correctAnswer =
-                  questionBrain.questionBank[questionTracker].questionAnswer!;
+                  questionBrain.getAnswer(questionTracker)!;
                   if (correctAnswer == false) {
                   } else {
                   }

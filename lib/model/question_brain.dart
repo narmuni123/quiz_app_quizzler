@@ -1,7 +1,7 @@
 import 'package:quiz_app_quizzler/model/question_model.dart';
 
 class QuestionBrain{
-  List<Question> questionBank = [
+  final List<Question> _questionBank = [
     Question(q: 'Some cats are actually allergic to humans', a: true),
     Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
     Question(
@@ -30,4 +30,12 @@ class QuestionBrain{
         q: 'In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.',
         a: true),
   ];
+
+  String? getQuestionText(int questionNumber){
+    return _questionBank[questionNumber].questionText;
+  }
+
+  bool? getAnswer(int answerNumber){
+    return _questionBank[answerNumber].questionAnswer;
+  }
 }
